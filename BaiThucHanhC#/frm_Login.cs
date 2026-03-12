@@ -34,6 +34,9 @@ namespace BaiThucHanhC_
             if (username == "1" && password == "1")
             {
                 MessageBox.Show("Đăng nhập thành công!");
+                frm_Dashboard dashboard = new frm_Dashboard();
+                dashboard.Show();
+                this.Hide();
             }
             else
             {
