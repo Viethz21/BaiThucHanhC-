@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLSV" Class="DataBaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-CMH3TD00\QUOCVIET;Initial Catalog=QLSV;User ID=sa;Trust Server Certificate=True" SettingsObjectName="BaiThucHanhC_.Properties.Settings" SettingsPropertyName="QLSVConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbl_Lop" Member="tbl_Lops">
+    <Type Name="tbl_Lop">
+      <Column Name="MaLop" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenLop" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Khoa" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="SiSo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_Lop_tbl_SinhVien" Member="tbl_SinhViens" ThisKey="MaLop" OtherKey="MaLop" Type="tbl_SinhVien" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_SinhVien" Member="tbl_SinhViens">
+    <Type Name="tbl_SinhVien">
+      <Column Name="MSSV" Type="System.String" DbType="NChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="GioiTinh" Type="System.String" DbType="NChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MaLop" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_Lop_tbl_SinhVien" Member="tbl_Lop" ThisKey="MaLop" OtherKey="MaLop" Type="tbl_Lop" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

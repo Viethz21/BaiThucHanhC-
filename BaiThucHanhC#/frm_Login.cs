@@ -35,8 +35,9 @@ namespace BaiThucHanhC_
             {
                 MessageBox.Show("Đăng nhập thành công!");
                 frm_Dashboard dashboard = new frm_Dashboard();
-                dashboard.Show();
-                this.Hide();
+                this.Hide();       
+                dashboard.ShowDialog();     
+                this.Show();
             }
             else
             {

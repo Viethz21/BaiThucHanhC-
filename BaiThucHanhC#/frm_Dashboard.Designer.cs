@@ -29,44 +29,46 @@
         private void InitializeComponent()
         {
             this.pnl_Menu = new System.Windows.Forms.Panel();
+            this.btn_logout = new System.Windows.Forms.Button();
             this.btn_QLDiem = new System.Windows.Forms.Button();
             this.btn_QLLop = new System.Windows.Forms.Button();
             this.btn_QLSinhvien = new System.Windows.Forms.Button();
             this.pnl_NavBar = new System.Windows.Forms.Panel();
-            this.lb_TimKiem = new System.Windows.Forms.Label();
+            this.btn_TimKiem = new System.Windows.Forms.Button();
             this.txt_TimKiem = new System.Windows.Forms.TextBox();
             this.pnl_Main = new System.Windows.Forms.Panel();
             this.pnl_QLSV = new System.Windows.Forms.Panel();
             this.dgv_SinhVien = new System.Windows.Forms.DataGridView();
-            this.MaSV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MSSV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_NgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnl_InputQLSV = new System.Windows.Forms.Panel();
-            this.rbtn_GioiTinhKhac = new System.Windows.Forms.RadioButton();
+            this.cbb_MaLop = new System.Windows.Forms.ComboBox();
+            this.rdb_Khac = new System.Windows.Forms.RadioButton();
             this.btn_LamMoi = new System.Windows.Forms.Button();
             this.btn_Xoa = new System.Windows.Forms.Button();
             this.btn_Sua = new System.Windows.Forms.Button();
             this.btn_Them = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txt_DiaChi = new System.Windows.Forms.TextBox();
             this.lb_DiaChi = new System.Windows.Forms.Label();
-            this.rbtn_GioiTinhNu = new System.Windows.Forms.RadioButton();
-            this.rbtn_GioiTinhNam = new System.Windows.Forms.RadioButton();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.rdb_Nu = new System.Windows.Forms.RadioButton();
+            this.rdb_Nam = new System.Windows.Forms.RadioButton();
+            this.dtp_NgaySinh = new System.Windows.Forms.DateTimePicker();
             this.lb_NgaySinh = new System.Windows.Forms.Label();
             this.lb_GioiTinh = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_HoTen = new System.Windows.Forms.TextBox();
             this.lb_Hoten = new System.Windows.Forms.Label();
             this.lb_MaLop = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt_MSSV = new System.Windows.Forms.TextBox();
             this.lb_MaSV = new System.Windows.Forms.Label();
             this.pnl_Lop = new System.Windows.Forms.Panel();
             this.pnl_InputLop = new System.Windows.Forms.Panel();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.lb_SiSo = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_details = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -95,6 +97,7 @@
             // pnl_Menu
             // 
             this.pnl_Menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.pnl_Menu.Controls.Add(this.btn_logout);
             this.pnl_Menu.Controls.Add(this.btn_QLDiem);
             this.pnl_Menu.Controls.Add(this.btn_QLLop);
             this.pnl_Menu.Controls.Add(this.btn_QLSinhvien);
@@ -103,6 +106,20 @@
             this.pnl_Menu.Name = "pnl_Menu";
             this.pnl_Menu.Size = new System.Drawing.Size(70, 549);
             this.pnl_Menu.TabIndex = 0;
+            // 
+            // btn_logout
+            // 
+            this.btn_logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_logout.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_logout.ForeColor = System.Drawing.Color.White;
+            this.btn_logout.Location = new System.Drawing.Point(0, 499);
+            this.btn_logout.Name = "btn_logout";
+            this.btn_logout.Size = new System.Drawing.Size(70, 50);
+            this.btn_logout.TabIndex = 3;
+            this.btn_logout.Text = "Đăng xuất";
+            this.btn_logout.UseMnemonic = false;
+            this.btn_logout.UseVisualStyleBackColor = true;
+            this.btn_logout.Click += new System.EventHandler(this.btn_Exit_Click);
             // 
             // btn_QLDiem
             // 
@@ -143,7 +160,7 @@
             // pnl_NavBar
             // 
             this.pnl_NavBar.BackColor = System.Drawing.Color.Silver;
-            this.pnl_NavBar.Controls.Add(this.lb_TimKiem);
+            this.pnl_NavBar.Controls.Add(this.btn_TimKiem);
             this.pnl_NavBar.Controls.Add(this.txt_TimKiem);
             this.pnl_NavBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_NavBar.Location = new System.Drawing.Point(70, 0);
@@ -151,28 +168,31 @@
             this.pnl_NavBar.Size = new System.Drawing.Size(925, 84);
             this.pnl_NavBar.TabIndex = 1;
             // 
-            // lb_TimKiem
+            // btn_TimKiem
             // 
-            this.lb_TimKiem.AutoSize = true;
-            this.lb_TimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_TimKiem.Location = new System.Drawing.Point(10, 30);
-            this.lb_TimKiem.Name = "lb_TimKiem";
-            this.lb_TimKiem.Size = new System.Drawing.Size(70, 16);
-            this.lb_TimKiem.TabIndex = 1;
-            this.lb_TimKiem.Text = "Tìm kiếm";
-            this.lb_TimKiem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btn_TimKiem.BackColor = System.Drawing.Color.Bisque;
+            this.btn_TimKiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_TimKiem.Location = new System.Drawing.Point(633, 18);
+            this.btn_TimKiem.Name = "btn_TimKiem";
+            this.btn_TimKiem.Size = new System.Drawing.Size(62, 44);
+            this.btn_TimKiem.TabIndex = 1;
+            this.btn_TimKiem.Text = "Tìm";
+            this.btn_TimKiem.UseVisualStyleBackColor = false;
+            this.btn_TimKiem.Click += new System.EventHandler(this.btn_TimKiem_Click);
             // 
             // txt_TimKiem
             // 
-            this.txt_TimKiem.Location = new System.Drawing.Point(98, 30);
+            this.txt_TimKiem.Location = new System.Drawing.Point(713, 29);
             this.txt_TimKiem.Name = "txt_TimKiem";
             this.txt_TimKiem.Size = new System.Drawing.Size(200, 22);
             this.txt_TimKiem.TabIndex = 0;
+            this.txt_TimKiem.Click += new System.EventHandler(this.btn_TimKiem_Click);
+            this.txt_TimKiem.Enter += new System.EventHandler(this.btn_TimKiem_Click);
             // 
             // pnl_Main
             // 
-            this.pnl_Main.Controls.Add(this.pnl_Lop);
             this.pnl_Main.Controls.Add(this.pnl_QLSV);
+            this.pnl_Main.Controls.Add(this.pnl_Lop);
             this.pnl_Main.Location = new System.Drawing.Point(70, 84);
             this.pnl_Main.Name = "pnl_Main";
             this.pnl_Main.Size = new System.Drawing.Size(925, 465);
@@ -192,33 +212,39 @@
             // 
             this.dgv_SinhVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_SinhVien.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dgv_SinhVien.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv_SinhVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_SinhVien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MaSV,
+            this.MSSV,
             this.HoTen,
             this.MaLop,
             this.GioiTinh,
-            this.txt_NgaySinh});
+            this.NgaySinh,
+            this.DiaChi});
             this.dgv_SinhVien.Dock = System.Windows.Forms.DockStyle.Right;
             this.dgv_SinhVien.Location = new System.Drawing.Point(348, 0);
             this.dgv_SinhVien.MultiSelect = false;
             this.dgv_SinhVien.Name = "dgv_SinhVien";
             this.dgv_SinhVien.ReadOnly = true;
+            this.dgv_SinhVien.RowHeadersVisible = false;
             this.dgv_SinhVien.RowHeadersWidth = 51;
             this.dgv_SinhVien.RowTemplate.Height = 24;
             this.dgv_SinhVien.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_SinhVien.Size = new System.Drawing.Size(577, 465);
             this.dgv_SinhVien.TabIndex = 5;
+            this.dgv_SinhVien.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_SinhVien_CellDoubleClick);
             // 
-            // MaSV
+            // MSSV
             // 
-            this.MaSV.HeaderText = "Mã SV";
-            this.MaSV.MinimumWidth = 6;
-            this.MaSV.Name = "MaSV";
-            this.MaSV.ReadOnly = true;
+            this.MSSV.DataPropertyName = "MSSV";
+            this.MSSV.HeaderText = "Mã SV";
+            this.MSSV.MinimumWidth = 6;
+            this.MSSV.Name = "MSSV";
+            this.MSSV.ReadOnly = true;
             // 
             // HoTen
             // 
+            this.HoTen.DataPropertyName = "HoTen";
             this.HoTen.HeaderText = "Họ tên";
             this.HoTen.MinimumWidth = 6;
             this.HoTen.Name = "HoTen";
@@ -226,6 +252,7 @@
             // 
             // MaLop
             // 
+            this.MaLop.DataPropertyName = "MaLop";
             this.MaLop.HeaderText = "Mã Lớp";
             this.MaLop.MinimumWidth = 6;
             this.MaLop.Name = "MaLop";
@@ -233,38 +260,48 @@
             // 
             // GioiTinh
             // 
+            this.GioiTinh.DataPropertyName = "GioiTinh";
             this.GioiTinh.HeaderText = "Giới Tính";
             this.GioiTinh.MinimumWidth = 6;
             this.GioiTinh.Name = "GioiTinh";
             this.GioiTinh.ReadOnly = true;
             // 
-            // txt_NgaySinh
+            // NgaySinh
             // 
-            this.txt_NgaySinh.HeaderText = "Ngày Sinh";
-            this.txt_NgaySinh.MinimumWidth = 6;
-            this.txt_NgaySinh.Name = "txt_NgaySinh";
-            this.txt_NgaySinh.ReadOnly = true;
+            this.NgaySinh.DataPropertyName = "NgaySinh";
+            this.NgaySinh.HeaderText = "Ngày Sinh";
+            this.NgaySinh.MinimumWidth = 6;
+            this.NgaySinh.Name = "NgaySinh";
+            this.NgaySinh.ReadOnly = true;
+            // 
+            // DiaChi
+            // 
+            this.DiaChi.HeaderText = "Địa Chỉ";
+            this.DiaChi.MinimumWidth = 6;
+            this.DiaChi.Name = "DiaChi";
+            this.DiaChi.ReadOnly = true;
+            this.DiaChi.Visible = false;
             // 
             // pnl_InputQLSV
             // 
             this.pnl_InputQLSV.BackColor = System.Drawing.Color.Silver;
-            this.pnl_InputQLSV.Controls.Add(this.rbtn_GioiTinhKhac);
+            this.pnl_InputQLSV.Controls.Add(this.cbb_MaLop);
+            this.pnl_InputQLSV.Controls.Add(this.rdb_Khac);
             this.pnl_InputQLSV.Controls.Add(this.btn_LamMoi);
             this.pnl_InputQLSV.Controls.Add(this.btn_Xoa);
             this.pnl_InputQLSV.Controls.Add(this.btn_Sua);
             this.pnl_InputQLSV.Controls.Add(this.btn_Them);
-            this.pnl_InputQLSV.Controls.Add(this.textBox4);
+            this.pnl_InputQLSV.Controls.Add(this.txt_DiaChi);
             this.pnl_InputQLSV.Controls.Add(this.lb_DiaChi);
-            this.pnl_InputQLSV.Controls.Add(this.rbtn_GioiTinhNu);
-            this.pnl_InputQLSV.Controls.Add(this.rbtn_GioiTinhNam);
-            this.pnl_InputQLSV.Controls.Add(this.dateTimePicker1);
+            this.pnl_InputQLSV.Controls.Add(this.rdb_Nu);
+            this.pnl_InputQLSV.Controls.Add(this.rdb_Nam);
+            this.pnl_InputQLSV.Controls.Add(this.dtp_NgaySinh);
             this.pnl_InputQLSV.Controls.Add(this.lb_NgaySinh);
             this.pnl_InputQLSV.Controls.Add(this.lb_GioiTinh);
-            this.pnl_InputQLSV.Controls.Add(this.textBox3);
-            this.pnl_InputQLSV.Controls.Add(this.textBox2);
+            this.pnl_InputQLSV.Controls.Add(this.txt_HoTen);
             this.pnl_InputQLSV.Controls.Add(this.lb_Hoten);
             this.pnl_InputQLSV.Controls.Add(this.lb_MaLop);
-            this.pnl_InputQLSV.Controls.Add(this.textBox1);
+            this.pnl_InputQLSV.Controls.Add(this.txt_MSSV);
             this.pnl_InputQLSV.Controls.Add(this.lb_MaSV);
             this.pnl_InputQLSV.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnl_InputQLSV.Location = new System.Drawing.Point(0, 0);
@@ -272,16 +309,24 @@
             this.pnl_InputQLSV.Size = new System.Drawing.Size(350, 465);
             this.pnl_InputQLSV.TabIndex = 3;
             // 
-            // rbtn_GioiTinhKhac
+            // cbb_MaLop
             // 
-            this.rbtn_GioiTinhKhac.AutoSize = true;
-            this.rbtn_GioiTinhKhac.Location = new System.Drawing.Point(240, 159);
-            this.rbtn_GioiTinhKhac.Name = "rbtn_GioiTinhKhac";
-            this.rbtn_GioiTinhKhac.Size = new System.Drawing.Size(58, 20);
-            this.rbtn_GioiTinhKhac.TabIndex = 18;
-            this.rbtn_GioiTinhKhac.TabStop = true;
-            this.rbtn_GioiTinhKhac.Text = "Khác";
-            this.rbtn_GioiTinhKhac.UseVisualStyleBackColor = true;
+            this.cbb_MaLop.FormattingEnabled = true;
+            this.cbb_MaLop.Location = new System.Drawing.Point(98, 117);
+            this.cbb_MaLop.Name = "cbb_MaLop";
+            this.cbb_MaLop.Size = new System.Drawing.Size(200, 24);
+            this.cbb_MaLop.TabIndex = 19;
+            // 
+            // rdb_Khac
+            // 
+            this.rdb_Khac.AutoSize = true;
+            this.rdb_Khac.Location = new System.Drawing.Point(240, 159);
+            this.rdb_Khac.Name = "rdb_Khac";
+            this.rdb_Khac.Size = new System.Drawing.Size(58, 20);
+            this.rdb_Khac.TabIndex = 18;
+            this.rdb_Khac.TabStop = true;
+            this.rdb_Khac.Text = "Khác";
+            this.rdb_Khac.UseVisualStyleBackColor = true;
             // 
             // btn_LamMoi
             // 
@@ -295,6 +340,7 @@
             this.btn_LamMoi.TabIndex = 17;
             this.btn_LamMoi.Text = "Làm mới";
             this.btn_LamMoi.UseVisualStyleBackColor = false;
+            this.btn_LamMoi.Click += new System.EventHandler(this.btn_LamMoi_SV_Click);
             // 
             // btn_Xoa
             // 
@@ -308,6 +354,7 @@
             this.btn_Xoa.TabIndex = 16;
             this.btn_Xoa.Text = "Xóa";
             this.btn_Xoa.UseVisualStyleBackColor = false;
+            this.btn_Xoa.Click += new System.EventHandler(this.btn_Xoa_SV_Click);
             // 
             // btn_Sua
             // 
@@ -320,6 +367,7 @@
             this.btn_Sua.TabIndex = 15;
             this.btn_Sua.Text = "Sửa";
             this.btn_Sua.UseVisualStyleBackColor = false;
+            this.btn_Sua.Click += new System.EventHandler(this.btn_Sua_SV_Click);
             // 
             // btn_Them
             // 
@@ -333,14 +381,15 @@
             this.btn_Them.TabIndex = 14;
             this.btn_Them.Text = "Thêm";
             this.btn_Them.UseVisualStyleBackColor = false;
+            this.btn_Them.Click += new System.EventHandler(this.btn_Them_SV_Click);
             // 
-            // textBox4
+            // txt_DiaChi
             // 
-            this.textBox4.Location = new System.Drawing.Point(98, 237);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(200, 59);
-            this.textBox4.TabIndex = 13;
+            this.txt_DiaChi.Location = new System.Drawing.Point(98, 237);
+            this.txt_DiaChi.Multiline = true;
+            this.txt_DiaChi.Name = "txt_DiaChi";
+            this.txt_DiaChi.Size = new System.Drawing.Size(200, 59);
+            this.txt_DiaChi.TabIndex = 13;
             // 
             // lb_DiaChi
             // 
@@ -353,34 +402,34 @@
             this.lb_DiaChi.Text = "Địa chỉ:";
             this.lb_DiaChi.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // rbtn_GioiTinhNu
+            // rdb_Nu
             // 
-            this.rbtn_GioiTinhNu.AutoSize = true;
-            this.rbtn_GioiTinhNu.Location = new System.Drawing.Point(170, 159);
-            this.rbtn_GioiTinhNu.Name = "rbtn_GioiTinhNu";
-            this.rbtn_GioiTinhNu.Size = new System.Drawing.Size(45, 20);
-            this.rbtn_GioiTinhNu.TabIndex = 11;
-            this.rbtn_GioiTinhNu.TabStop = true;
-            this.rbtn_GioiTinhNu.Text = "Nữ";
-            this.rbtn_GioiTinhNu.UseVisualStyleBackColor = true;
+            this.rdb_Nu.AutoSize = true;
+            this.rdb_Nu.Location = new System.Drawing.Point(170, 159);
+            this.rdb_Nu.Name = "rdb_Nu";
+            this.rdb_Nu.Size = new System.Drawing.Size(45, 20);
+            this.rdb_Nu.TabIndex = 11;
+            this.rdb_Nu.TabStop = true;
+            this.rdb_Nu.Text = "Nữ";
+            this.rdb_Nu.UseVisualStyleBackColor = true;
             // 
-            // rbtn_GioiTinhNam
+            // rdb_Nam
             // 
-            this.rbtn_GioiTinhNam.AutoSize = true;
-            this.rbtn_GioiTinhNam.Location = new System.Drawing.Point(98, 159);
-            this.rbtn_GioiTinhNam.Name = "rbtn_GioiTinhNam";
-            this.rbtn_GioiTinhNam.Size = new System.Drawing.Size(57, 20);
-            this.rbtn_GioiTinhNam.TabIndex = 10;
-            this.rbtn_GioiTinhNam.TabStop = true;
-            this.rbtn_GioiTinhNam.Text = "Nam";
-            this.rbtn_GioiTinhNam.UseVisualStyleBackColor = true;
+            this.rdb_Nam.AutoSize = true;
+            this.rdb_Nam.Location = new System.Drawing.Point(98, 159);
+            this.rdb_Nam.Name = "rdb_Nam";
+            this.rdb_Nam.Size = new System.Drawing.Size(57, 20);
+            this.rdb_Nam.TabIndex = 10;
+            this.rdb_Nam.TabStop = true;
+            this.rdb_Nam.Text = "Nam";
+            this.rdb_Nam.UseVisualStyleBackColor = true;
             // 
-            // dateTimePicker1
+            // dtp_NgaySinh
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(98, 193);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePicker1.TabIndex = 9;
+            this.dtp_NgaySinh.Location = new System.Drawing.Point(98, 193);
+            this.dtp_NgaySinh.Name = "dtp_NgaySinh";
+            this.dtp_NgaySinh.Size = new System.Drawing.Size(200, 22);
+            this.dtp_NgaySinh.TabIndex = 9;
             // 
             // lb_NgaySinh
             // 
@@ -404,19 +453,12 @@
             this.lb_GioiTinh.Text = "Giới tính: ";
             this.lb_GioiTinh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox3
+            // txt_HoTen
             // 
-            this.textBox3.Location = new System.Drawing.Point(98, 120);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(200, 22);
-            this.textBox3.TabIndex = 5;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(98, 86);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(200, 22);
-            this.textBox2.TabIndex = 4;
+            this.txt_HoTen.Location = new System.Drawing.Point(98, 86);
+            this.txt_HoTen.Name = "txt_HoTen";
+            this.txt_HoTen.Size = new System.Drawing.Size(200, 22);
+            this.txt_HoTen.TabIndex = 4;
             // 
             // lb_Hoten
             // 
@@ -440,12 +482,12 @@
             this.lb_MaLop.Text = "Mã Lớp: ";
             this.lb_MaLop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // txt_MSSV
             // 
-            this.textBox1.Location = new System.Drawing.Point(98, 50);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 22);
-            this.textBox1.TabIndex = 1;
+            this.txt_MSSV.Location = new System.Drawing.Point(98, 47);
+            this.txt_MSSV.Name = "txt_MSSV";
+            this.txt_MSSV.Size = new System.Drawing.Size(200, 22);
+            this.txt_MSSV.TabIndex = 1;
             // 
             // lb_MaSV
             // 
@@ -460,8 +502,8 @@
             // 
             // pnl_Lop
             // 
-            this.pnl_Lop.Controls.Add(this.dgv_Lop);
             this.pnl_Lop.Controls.Add(this.pnl_InputLop);
+            this.pnl_Lop.Controls.Add(this.dgv_Lop);
             this.pnl_Lop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_Lop.Location = new System.Drawing.Point(0, 0);
             this.pnl_Lop.Name = "pnl_Lop";
@@ -473,7 +515,7 @@
             this.pnl_InputLop.BackColor = System.Drawing.Color.Silver;
             this.pnl_InputLop.Controls.Add(this.textBox5);
             this.pnl_InputLop.Controls.Add(this.lb_SiSo);
-            this.pnl_InputLop.Controls.Add(this.button1);
+            this.pnl_InputLop.Controls.Add(this.btn_details);
             this.pnl_InputLop.Controls.Add(this.button2);
             this.pnl_InputLop.Controls.Add(this.button3);
             this.pnl_InputLop.Controls.Add(this.button4);
@@ -507,18 +549,19 @@
             this.lb_SiSo.Text = "Sĩ Số: ";
             this.lb_SiSo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button1
+            // btn_details
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(181, 328);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 35);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Xem chi tiết";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btn_details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.btn_details.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_details.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_details.ForeColor = System.Drawing.Color.Black;
+            this.btn_details.Location = new System.Drawing.Point(181, 328);
+            this.btn_details.Name = "btn_details";
+            this.btn_details.Size = new System.Drawing.Size(105, 35);
+            this.btn_details.TabIndex = 17;
+            this.btn_details.Text = "Xem chi tiết";
+            this.btn_details.UseVisualStyleBackColor = false;
+            this.btn_details.Click += new System.EventHandler(this.btn_details_Click);
             // 
             // button2
             // 
@@ -616,6 +659,7 @@
             // 
             this.dgv_Lop.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_Lop.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dgv_Lop.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv_Lop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Lop.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.txtMalop,
@@ -627,6 +671,7 @@
             this.dgv_Lop.MultiSelect = false;
             this.dgv_Lop.Name = "dgv_Lop";
             this.dgv_Lop.ReadOnly = true;
+            this.dgv_Lop.RowHeadersVisible = false;
             this.dgv_Lop.RowHeadersWidth = 51;
             this.dgv_Lop.RowTemplate.Height = 24;
             this.dgv_Lop.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -635,6 +680,7 @@
             // 
             // txtMalop
             // 
+            this.txtMalop.DataPropertyName = "MaLop";
             this.txtMalop.HeaderText = "Mã Lớp";
             this.txtMalop.MinimumWidth = 6;
             this.txtMalop.Name = "txtMalop";
@@ -642,6 +688,7 @@
             // 
             // txtTenLop
             // 
+            this.txtTenLop.DataPropertyName = "TenLop";
             this.txtTenLop.HeaderText = "Tên Lớp";
             this.txtTenLop.MinimumWidth = 6;
             this.txtTenLop.Name = "txtTenLop";
@@ -649,6 +696,7 @@
             // 
             // txtKhoa
             // 
+            this.txtKhoa.DataPropertyName = "Khoa";
             this.txtKhoa.HeaderText = "Khoa";
             this.txtKhoa.MinimumWidth = 6;
             this.txtKhoa.Name = "txtKhoa";
@@ -656,6 +704,7 @@
             // 
             // txtSiSo
             // 
+            this.txtSiSo.DataPropertyName = "SiSo";
             this.txtSiSo.HeaderText = "Sĩ số";
             this.txtSiSo.MinimumWidth = 6;
             this.txtSiSo.Name = "txtSiSo";
@@ -697,39 +746,18 @@
         private System.Windows.Forms.Button btn_QLDiem;
         private System.Windows.Forms.Panel pnl_NavBar;
         private System.Windows.Forms.TextBox txt_TimKiem;
-        private System.Windows.Forms.Label lb_TimKiem;
         private System.Windows.Forms.Panel pnl_Main;
-        private System.Windows.Forms.Panel pnl_QLSV;
-        private System.Windows.Forms.DataGridView dgv_SinhVien;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaSV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HoTen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaLop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GioiTinh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txt_NgaySinh;
-        private System.Windows.Forms.Panel pnl_InputQLSV;
-        private System.Windows.Forms.RadioButton rbtn_GioiTinhKhac;
-        private System.Windows.Forms.Button btn_LamMoi;
-        private System.Windows.Forms.Button btn_Xoa;
-        private System.Windows.Forms.Button btn_Sua;
-        private System.Windows.Forms.Button btn_Them;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label lb_DiaChi;
-        private System.Windows.Forms.RadioButton rbtn_GioiTinhNu;
-        private System.Windows.Forms.RadioButton rbtn_GioiTinhNam;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label lb_NgaySinh;
-        private System.Windows.Forms.Label lb_GioiTinh;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label lb_Hoten;
-        private System.Windows.Forms.Label lb_MaLop;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label lb_MaSV;
+        private System.Windows.Forms.Button btn_logout;
         private System.Windows.Forms.Panel pnl_Lop;
+        private System.Windows.Forms.DataGridView dgv_Lop;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txtMalop;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txtTenLop;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txtKhoa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txtSiSo;
         private System.Windows.Forms.Panel pnl_InputLop;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label lb_SiSo;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_details;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
@@ -739,10 +767,33 @@
         private System.Windows.Forms.Label lb_Khoa;
         private System.Windows.Forms.TextBox txt_Malp;
         private System.Windows.Forms.Label lb_Malp;
-        private System.Windows.Forms.DataGridView dgv_Lop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txtMalop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txtTenLop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txtKhoa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txtSiSo;
+        private System.Windows.Forms.Panel pnl_QLSV;
+        private System.Windows.Forms.DataGridView dgv_SinhVien;
+        private System.Windows.Forms.Panel pnl_InputQLSV;
+        private System.Windows.Forms.RadioButton rdb_Khac;
+        private System.Windows.Forms.Button btn_LamMoi;
+        private System.Windows.Forms.Button btn_Xoa;
+        private System.Windows.Forms.Button btn_Sua;
+        private System.Windows.Forms.Button btn_Them;
+        private System.Windows.Forms.TextBox txt_DiaChi;
+        private System.Windows.Forms.Label lb_DiaChi;
+        private System.Windows.Forms.RadioButton rdb_Nu;
+        private System.Windows.Forms.RadioButton rdb_Nam;
+        private System.Windows.Forms.DateTimePicker dtp_NgaySinh;
+        private System.Windows.Forms.Label lb_NgaySinh;
+        private System.Windows.Forms.Label lb_GioiTinh;
+        private System.Windows.Forms.TextBox txt_HoTen;
+        private System.Windows.Forms.Label lb_Hoten;
+        private System.Windows.Forms.Label lb_MaLop;
+        private System.Windows.Forms.TextBox txt_MSSV;
+        private System.Windows.Forms.Label lb_MaSV;
+        private System.Windows.Forms.ComboBox cbb_MaLop;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MSSV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HoTen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaLop;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GioiTinh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NgaySinh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiaChi;
+        private System.Windows.Forms.Button btn_TimKiem;
     }
 }
