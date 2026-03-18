@@ -133,6 +133,22 @@ namespace BaiThucHanhC_
             }
         }
 
+        private void LoadData_Lop()
+        {
+            try
+            {
+                using (DataBaseDataContext db = new DataBaseDataContext())
+                {
+                    var listLop = db.tbl_Lops.ToList();
+                    FillForm(dgv_Lop, listLop);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message);
+            }
+        }
+
         private void LoadData_SV(string keyword = "")
         {
             using (DataBaseDataContext db = new DataBaseDataContext())
@@ -167,6 +183,16 @@ namespace BaiThucHanhC_
             txt_MSSV.BackColor = Color.White;
 
             LoadData_SV();
+        }
+
+        private void ClearForm_Lop()
+        {
+            txt_Malp.Clear();
+            txt_TenLop.Clear();
+            txt_Khoa.Clear();
+            txt_SiSo.Clear();
+
+            LoadData_Lop();
         }
 
         private void FillForm(DataGridView dgv, object data)
@@ -292,6 +318,34 @@ namespace BaiThucHanhC_
                 case "Lop":
                     //LoadData_Lop(keyword);
                     break;
+            }
+        }
+
+        //Thêm Lớp
+        private void btn_Them_lop_Click(object sender, EventArgs e)
+        {
+            using (DataBaseDataContext db = new DataBaseDataContext())
+            {
+                if (int.TryParse(txt_SiSo.Text, out int siSoValue))
+                {
+                    tbl_Lop lp = new tbl_Lop
+                    {
+                        MaLop = txt_Malp.Text,
+                        TenLop = txt_TenLop.Text,
+                        Khoa = txt_Khoa.Text,
+                        SiSo = siSoValue
+                    };
+
+                    db.tbl_Lops.InsertOnSubmit(lp);
+                    db.SubmitChanges();
+                    MessageBox.Show("Thêm lớp thành công!");
+
+                    ClearForm_Lop();
+                }
+                else
+                {
+                    MessageBox.Show("Sĩ số phải là một con số hợp lệ.");
+                }
             }
         }
 

@@ -33,5 +33,16 @@ namespace BaiThucHanhC_.Properties {
                 return ((string)(this["QLSVConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=M540\\SQLEXPRESS;Initial Catalog=QLSV;Integrated Security=True;TrustSe" +
+            "rverCertificate=True")]
+        public string QLSVConnectionString1 {
+            get {
+                return ((string)(this["QLSVConnectionString1"]));
+            }
+        }
     }
 }
