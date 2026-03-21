@@ -37,11 +37,15 @@ namespace BaiThucHanhC_
         private void btn_QLSinhvien_Click(object sender, EventArgs e)
         {
             pnl_QLSV.BringToFront();
+            dangQuanLy = "SinhVien";
+            LoadData_SV();
         }
 
         private void btn_QLLop_Click(object sender, EventArgs e)
         {
             pnl_Lop.BringToFront();
+            dangQuanLy = "Lop";
+            LoadData_Lop();
         }
 
         private void btn_Exit_Click(object sender, EventArgs e)
@@ -107,6 +111,49 @@ namespace BaiThucHanhC_
             }
         }
 
+        string maLopDangChon = "";
+        private void dgv_Lop_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                try
+                {
+                    DataGridViewRow row = dgv_Lop.Rows[e.RowIndex];
+                    if (row.Cells["txtMalop"].Value == null) return;
+                    string malop = row.Cells["txtmalop"].Value.ToString();
+
+                    maLopDangChon = malop;
+                    using (DataBaseDataContext db = new DataBaseDataContext())
+                    {
+                        var lop = db.tbl_Lops.FirstOrDefault(l => l.MaLop == malop);
+                        if (lop != null)
+                        {
+                            txt_Malp.Text = lop.MaLop ?? "";
+                            txt_TenLop.Text = lop.TenLop ?? "";
+                            txt_Khoa.Text = lop.Khoa ?? "";
+                            txt_SiSo.Text = lop.SiSo.ToString();
+                        }
+
+                        txt_Malp.ReadOnly = true;
+                        txt_Malp.BackColor = Color.LightGray;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi lấy dữ liệu từ DB: " + ex.Message);
+                }
+            }
+        }
+
+        private void FillForm(DataGridView dgv, object data)
+        {
+            dgv.DataSource = data;
+
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.ReadOnly = true;
+        }
+
 
         private void LoadData_SV()
         {
@@ -125,22 +172,6 @@ namespace BaiThucHanhC_
                     FillForm(dgv_SinhVien, listSV);
 
                     
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message);
-            }
-        }
-
-        private void LoadData_Lop()
-        {
-            try
-            {
-                using (DataBaseDataContext db = new DataBaseDataContext())
-                {
-                    var listLop = db.tbl_Lops.ToList();
-                    FillForm(dgv_Lop, listLop);
                 }
             }
             catch (Exception ex)
@@ -195,13 +226,45 @@ namespace BaiThucHanhC_
             LoadData_Lop();
         }
 
-        private void FillForm(DataGridView dgv, object data)
+        private void LoadData_Lop()
         {
-            dgv.DataSource = data;
+            try
+            {
+                using (DataBaseDataContext db = new DataBaseDataContext())
+                {
+                    var listLop = db.tbl_Lops.Select(l => new
+                    {
+                        l.MaLop,
+                        l.TenLop,
+                        l.Khoa,
+                        l.SiSo
+                    }).ToList();
+                    FillForm(dgv_Lop, listLop);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message);
+            }
+        }
 
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.ReadOnly = true;
+        private void LoadData_Lop(string keyword = "")
+        {
+            using (DataBaseDataContext db = new DataBaseDataContext())
+            {
+                var data = db.tbl_Lops.AsQueryable();
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    data = data.Where(l => l.TenLop.Contains(keyword) || l.MaLop.Contains(keyword) || l.Khoa.Contains(keyword));
+                }
+                dgv_Lop.DataSource = data.Select(l => new
+                {
+                    l.MaLop,
+                    l.TenLop,
+                    l.Khoa,
+                    l.SiSo
+                }).ToList();
+            }
         }
 
         private string LayGioiTinh()
@@ -304,56 +367,111 @@ namespace BaiThucHanhC_
             ClearForm_SV();
         }
 
-        //tìm kiếm sinh viên theo tên, mã sinh viên hoặc lớp
-        string dangQuanLy = "SinhVien"; // Biến toàn cục trong Form chính
-        private void btn_TimKiem_Click(object sender, EventArgs e)
-        {
-            string keyword = txt_TimKiem.Text.Trim();
 
-            switch (dangQuanLy)
-            {
-                case "SinhVien":
-                    LoadData_SV(keyword);
-                    break;
-                case "Lop":
-                    //LoadData_Lop(keyword);
-                    break;
-            }
-        }
 
         //Thêm Lớp
         private void btn_Them_lop_Click(object sender, EventArgs e)
         {
             using (DataBaseDataContext db = new DataBaseDataContext())
             {
-                if (int.TryParse(txt_SiSo.Text, out int siSoValue))
+                tbl_Lop lop = new tbl_Lop
                 {
-                    tbl_Lop lp = new tbl_Lop
-                    {
-                        MaLop = txt_Malp.Text,
-                        TenLop = txt_TenLop.Text,
-                        Khoa = txt_Khoa.Text,
-                        SiSo = siSoValue
-                    };
+                    MaLop = txt_Malp.Text,
+                    TenLop = txt_TenLop.Text,
+                    Khoa = txt_Khoa.Text,
+                    SiSo = int.Parse(txt_SiSo.Text)
+                };
+                db.tbl_Lops.InsertOnSubmit(lop);
+                db.SubmitChanges();
+                MessageBox.Show("Thêm Lớp thành công");
 
-                    db.tbl_Lops.InsertOnSubmit(lp);
-                    db.SubmitChanges();
-                    MessageBox.Show("Thêm lớp thành công!");
-
-                    ClearForm_Lop();
-                }
-                else
-                {
-                    MessageBox.Show("Sĩ số phải là một con số hợp lệ.");
-                }
+                ClearForm_Lop();
             }
         }
 
-        //xem chi tiết lớp học
-        private void btn_details_Click(object sender, EventArgs e)
+        private void btn_Sua_Lop_Click(object sender, EventArgs e)
         {
-            frm_Class_Detals CDetails = new frm_Class_Detals();
-            CDetails.ShowDialog();
+            if (dgv_Lop.SelectedRows.Count > 0)
+            {
+                string malop = dgv_Lop.SelectedRows[0].Cells["txtMalop"].Value.ToString();
+                using (DataBaseDataContext db = new DataBaseDataContext())
+                {
+                    var lop = db.tbl_Lops.FirstOrDefault(l => l.MaLop == malop);
+                    if (lop != null)
+                    {
+                        lop.TenLop = txt_TenLop.Text;
+                        lop.Khoa = txt_Khoa.Text;
+                        lop.SiSo = int.Parse(txt_SiSo.Text);
+                        db.SubmitChanges();
+                        MessageBox.Show("Sửa thông tin Lớp thành công");
+                        ClearForm_Lop();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một lớp để sửa.");
+            }
+        }
+
+        private void btn_Xoa_Lop_Click(object sender, EventArgs e)
+        {
+            if (dgv_Lop.SelectedRows.Count > 0)
+            {
+                DialogResult result = MessageBox.Show(
+                    "Bạn có chắc chắn muốn xóa lớp này không?",
+                    "Xác nhận xóa",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+                if (result == DialogResult.Yes)
+                {
+                    string malop = dgv_Lop.SelectedRows[0].Cells["txtMalop"].Value.ToString();
+                    using (DataBaseDataContext db = new DataBaseDataContext())
+                    {
+                        var lop = db.tbl_Lops.FirstOrDefault(l => l.MaLop == malop);
+                        if (lop != null)
+                        {
+                            db.tbl_Lops.DeleteOnSubmit(lop);
+                            db.SubmitChanges();
+                            MessageBox.Show("Xóa Lớp thành công");
+                            ClearForm_Lop();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một lớp để xóa.");
+            }
+        }
+
+        private void btn_LamMoi_Lop_Click(object sender, EventArgs e)
+        {
+            ClearForm_Lop();
+        }
+
+        //tìm kiếm sinh viên theo tên, mã sinh viên hoặc lớp
+        string dangQuanLy = "SinhVien"; // Biến toàn cục trong Form chính
+        private void btn_TimKiem_Click(object sender, EventArgs e)
+        {
+            string keyword = txt_TimKiem.Text.Trim();
+            if (dangQuanLy == "SinhVien")
+                LoadData_SV(keyword);
+            else if (dangQuanLy == "Lop")
+                LoadData_Lop(keyword);
+        }
+
+        private void btn_XemChiTiet_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(maLopDangChon))
+            {
+                MessageBox.Show("Vui lòng chọn lớp trước!");
+                return;
+            }
+
+            frm_Class_Detals f = new frm_Class_Detals(maLopDangChon);
+            f.ShowDialog();
         }
     }
 }

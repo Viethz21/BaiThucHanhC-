@@ -44,5 +44,16 @@ namespace BaiThucHanhC_.Properties {
                 return ((string)(this["QLSVConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-CMH3TD00\\QUOCVIET;Initial Catalog=QLSV;Persist Security Info=T" +
+            "rue;User ID=sa;Password=viethz21;TrustServerCertificate=True")]
+        public string QLSVConnectionString2 {
+            get {
+                return ((string)(this["QLSVConnectionString2"]));
+            }
+        }
     }
 }

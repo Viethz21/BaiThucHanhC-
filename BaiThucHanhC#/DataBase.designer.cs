@@ -39,7 +39,7 @@ namespace BaiThucHanhC_
     #endregion
 		
 		public DataBaseDataContext() : 
-				base(global::BaiThucHanhC_.Properties.Settings.Default.QLSVConnectionString1, mappingSource)
+				base(global::BaiThucHanhC_.Properties.Settings.Default.QLSVConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -85,7 +85,7 @@ namespace BaiThucHanhC_
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Lops")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Lop")]
 	public partial class tbl_Lop : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -247,7 +247,7 @@ namespace BaiThucHanhC_
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_SinhViens")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_SinhVien")]
 	public partial class tbl_SinhVien : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -257,13 +257,13 @@ namespace BaiThucHanhC_
 		
 		private string _HoTen;
 		
-		private System.DateTime _NgaySinh;
+		private string _GioiTinh;
 		
-		private string _MaLop;
+		private System.DateTime _NgaySinh;
 		
 		private string _DiaChi;
 		
-		private string _GioiTinh;
+		private string _MaLop;
 		
 		private EntityRef<tbl_Lop> _tbl_Lop;
 		
@@ -275,14 +275,14 @@ namespace BaiThucHanhC_
     partial void OnMSSVChanged();
     partial void OnHoTenChanging(string value);
     partial void OnHoTenChanged();
-    partial void OnNgaySinhChanging(System.DateTime value);
-    partial void OnNgaySinhChanged();
-    partial void OnMaLopChanging(string value);
-    partial void OnMaLopChanged();
-    partial void OnDiaChiChanging(string value);
-    partial void OnDiaChiChanged();
     partial void OnGioiTinhChanging(string value);
     partial void OnGioiTinhChanged();
+    partial void OnNgaySinhChanging(System.DateTime value);
+    partial void OnNgaySinhChanged();
+    partial void OnDiaChiChanging(string value);
+    partial void OnDiaChiChanged();
+    partial void OnMaLopChanging(string value);
+    partial void OnMaLopChanged();
     #endregion
 		
 		public tbl_SinhVien()
@@ -291,7 +291,7 @@ namespace BaiThucHanhC_
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MSSV", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MSSV", DbType="NChar(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string MSSV
 		{
 			get
@@ -311,7 +311,7 @@ namespace BaiThucHanhC_
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoTen", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoTen", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string HoTen
 		{
 			get
@@ -327,6 +327,26 @@ namespace BaiThucHanhC_
 					this._HoTen = value;
 					this.SendPropertyChanged("HoTen");
 					this.OnHoTenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GioiTinh", DbType="NChar(5) NOT NULL", CanBeNull=false)]
+		public string GioiTinh
+		{
+			get
+			{
+				return this._GioiTinh;
+			}
+			set
+			{
+				if ((this._GioiTinh != value))
+				{
+					this.OnGioiTinhChanging(value);
+					this.SendPropertyChanging();
+					this._GioiTinh = value;
+					this.SendPropertyChanged("GioiTinh");
+					this.OnGioiTinhChanged();
 				}
 			}
 		}
@@ -351,6 +371,26 @@ namespace BaiThucHanhC_
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiaChi", DbType="NVarChar(100)")]
+		public string DiaChi
+		{
+			get
+			{
+				return this._DiaChi;
+			}
+			set
+			{
+				if ((this._DiaChi != value))
+				{
+					this.OnDiaChiChanging(value);
+					this.SendPropertyChanging();
+					this._DiaChi = value;
+					this.SendPropertyChanged("DiaChi");
+					this.OnDiaChiChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLop", DbType="NChar(10) NOT NULL", CanBeNull=false)]
 		public string MaLop
 		{
@@ -371,46 +411,6 @@ namespace BaiThucHanhC_
 					this._MaLop = value;
 					this.SendPropertyChanged("MaLop");
 					this.OnMaLopChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiaChi", DbType="NVarChar(50)")]
-		public string DiaChi
-		{
-			get
-			{
-				return this._DiaChi;
-			}
-			set
-			{
-				if ((this._DiaChi != value))
-				{
-					this.OnDiaChiChanging(value);
-					this.SendPropertyChanging();
-					this._DiaChi = value;
-					this.SendPropertyChanged("DiaChi");
-					this.OnDiaChiChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GioiTinh", DbType="NChar(10) NOT NULL", CanBeNull=false)]
-		public string GioiTinh
-		{
-			get
-			{
-				return this._GioiTinh;
-			}
-			set
-			{
-				if ((this._GioiTinh != value))
-				{
-					this.OnGioiTinhChanging(value);
-					this.SendPropertyChanging();
-					this._GioiTinh = value;
-					this.SendPropertyChanged("GioiTinh");
-					this.OnGioiTinhChanged();
 				}
 			}
 		}

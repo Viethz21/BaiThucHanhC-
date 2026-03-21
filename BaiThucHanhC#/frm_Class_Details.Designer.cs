@@ -31,16 +31,15 @@
             this.dgv_details = new System.Windows.Forms.DataGridView();
             this.lb_Siso = new System.Windows.Forms.Label();
             this.lb_Number_Siso = new System.Windows.Forms.Label();
-            this.txt_MaSV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_Hoten = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_Gioitinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_Ngaysinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_Diem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lb_Ten_Lop = new System.Windows.Forms.Label();
             this.lb_TenLop = new System.Windows.Forms.Label();
             this.txt_TimKiem = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_TimKiem = new System.Windows.Forms.Button();
+            this.txt_MaSV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txt_Hoten = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txt_Gioitinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txt_Ngaysinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_details)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,10 +52,10 @@
             this.txt_MaSV,
             this.txt_Hoten,
             this.txt_Gioitinh,
-            this.txt_Ngaysinh,
-            this.txt_Diem});
+            this.txt_Ngaysinh});
             this.dgv_details.Location = new System.Drawing.Point(18, 199);
             this.dgv_details.Name = "dgv_details";
+            this.dgv_details.RowHeadersVisible = false;
             this.dgv_details.RowHeadersWidth = 51;
             this.dgv_details.RowTemplate.Height = 24;
             this.dgv_details.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -84,40 +83,6 @@
             this.lb_Number_Siso.Text = "8";
             this.lb_Number_Siso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lb_Number_Siso.Click += new System.EventHandler(this.lb_Number_Click);
-            // 
-            // txt_MaSV
-            // 
-            this.txt_MaSV.HeaderText = "Mã SV";
-            this.txt_MaSV.MinimumWidth = 6;
-            this.txt_MaSV.Name = "txt_MaSV";
-            this.txt_MaSV.ReadOnly = true;
-            // 
-            // txt_Hoten
-            // 
-            this.txt_Hoten.HeaderText = "Họ tên";
-            this.txt_Hoten.MinimumWidth = 6;
-            this.txt_Hoten.Name = "txt_Hoten";
-            this.txt_Hoten.ReadOnly = true;
-            // 
-            // txt_Gioitinh
-            // 
-            this.txt_Gioitinh.HeaderText = "Giới tính";
-            this.txt_Gioitinh.MinimumWidth = 6;
-            this.txt_Gioitinh.Name = "txt_Gioitinh";
-            this.txt_Gioitinh.ReadOnly = true;
-            // 
-            // txt_Ngaysinh
-            // 
-            this.txt_Ngaysinh.HeaderText = "Ngày Sinh";
-            this.txt_Ngaysinh.MinimumWidth = 6;
-            this.txt_Ngaysinh.Name = "txt_Ngaysinh";
-            // 
-            // txt_Diem
-            // 
-            this.txt_Diem.HeaderText = "Điểm số";
-            this.txt_Diem.MinimumWidth = 6;
-            this.txt_Diem.Name = "txt_Diem";
-            this.txt_Diem.ReadOnly = true;
             // 
             // lb_Ten_Lop
             // 
@@ -168,6 +133,38 @@
             this.btn_TimKiem.TabIndex = 7;
             this.btn_TimKiem.Text = "Tìm ";
             this.btn_TimKiem.UseVisualStyleBackColor = false;
+            this.btn_TimKiem.Click += new System.EventHandler(this.txt_TimKiem_TextChanged);
+            // 
+            // txt_MaSV
+            // 
+            this.txt_MaSV.DataPropertyName = "MSSV";
+            this.txt_MaSV.HeaderText = "Mã SV";
+            this.txt_MaSV.MinimumWidth = 6;
+            this.txt_MaSV.Name = "txt_MaSV";
+            this.txt_MaSV.ReadOnly = true;
+            // 
+            // txt_Hoten
+            // 
+            this.txt_Hoten.DataPropertyName = "HoTen";
+            this.txt_Hoten.HeaderText = "Họ tên";
+            this.txt_Hoten.MinimumWidth = 6;
+            this.txt_Hoten.Name = "txt_Hoten";
+            this.txt_Hoten.ReadOnly = true;
+            // 
+            // txt_Gioitinh
+            // 
+            this.txt_Gioitinh.DataPropertyName = "GioiTinh";
+            this.txt_Gioitinh.HeaderText = "Giới tính";
+            this.txt_Gioitinh.MinimumWidth = 6;
+            this.txt_Gioitinh.Name = "txt_Gioitinh";
+            this.txt_Gioitinh.ReadOnly = true;
+            // 
+            // txt_Ngaysinh
+            // 
+            this.txt_Ngaysinh.DataPropertyName = "NgaySInh";
+            this.txt_Ngaysinh.HeaderText = "Ngày Sinh";
+            this.txt_Ngaysinh.MinimumWidth = 6;
+            this.txt_Ngaysinh.Name = "txt_Ngaysinh";
             // 
             // frm_Class_Detals
             // 
@@ -186,6 +183,7 @@
             this.Name = "frm_Class_Detals";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chi tiết lớp học";
+            this.Load += new System.EventHandler(this.frm_Class_Detals_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_details)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -197,15 +195,14 @@
         private System.Windows.Forms.DataGridView dgv_details;
         private System.Windows.Forms.Label lb_Siso;
         private System.Windows.Forms.Label lb_Number_Siso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txt_MaSV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txt_Hoten;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txt_Gioitinh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txt_Ngaysinh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txt_Diem;
         private System.Windows.Forms.Label lb_Ten_Lop;
         private System.Windows.Forms.Label lb_TenLop;
         private System.Windows.Forms.TextBox txt_TimKiem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_TimKiem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txt_MaSV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txt_Hoten;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txt_Gioitinh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txt_Ngaysinh;
     }
 }
